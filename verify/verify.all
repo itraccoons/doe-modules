@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERIFY_CHECKS=$DOE_HOMEDIR/etc/verify_checks
+VERIFY_CHECKS=$(dirname ${BASH_SOURCE[0]})/.data/verify_checks
 
 IFS=$'\r\n' checks=($(cat ${VERIFY_CHECKS}))
 
