@@ -1,5 +1,10 @@
 #!/bin/sh
 
-find ~ -name .vagrant -exec rm -dr {} +
-vagrant global-status --prune
-killall VBoxHeadless
+vagrant_clean()
+{
+    find ~ -name .vagrant -exec rm -dr {} +
+    vagrant global-status --prune
+    killall VBoxHeadless
+}
+
+vagrant_clean "$@"

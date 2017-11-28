@@ -6,4 +6,4 @@ vagrant_create_ubuntu()
     cd "${DOE_TMPDIR}"/ubuntu && vagrant init ubuntu/xenial64 --minimal --force && vagrant up && vagrant ssh
 }
 
-vagrant_create_ubuntu
+vagrant_create_ubuntu "$@"
