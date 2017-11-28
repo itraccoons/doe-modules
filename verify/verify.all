@@ -6,16 +6,23 @@ IFS=$'\r\n' checks=($(cat ${VERIFY_CHECKS}))
 
 do_check()
 {
-    IFS=':' a=($1)
-    set +f $a
-    set -f $a
-    if [ -f $1 ]
+    oldIFS=$IFS
+    IFS=':' a=($1)	# create array from  $1
+    set -f $a		# disable globbing
+    if [ -f $1 ]	# if file exist
     then
-    echo "${RED}${a[0]} detected ${NC}"
-    sh -c "${a[1]}"
+	echo "${RED}${a[0]} detected ${NC} -- exec: ${a[1]}"
+	sh -c "${a[1]}"
     fi
+    set +f		# enable globbing
+    IFS=$oldIFS		# restore "internal field separator"
 }
 
-set -f
-for c in ${checks[@]}; do do_check "${c}"; done
+
+#set -f
+for c in ${checks[@]}
+do
+    do_check "${c}"
+done
+
 exit 0
