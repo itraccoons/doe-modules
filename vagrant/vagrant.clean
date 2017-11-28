@@ -2,9 +2,10 @@
 
 vagrant_clean()
 {
-    find ~ -name .vagrant -exec rm -dr {} +
     vagrant global-status --prune
+    find ~ -name .vagrant -exec rm -dr {} +
     killall VBoxHeadless
+
 }
 
 vagrant_clean "$@"
