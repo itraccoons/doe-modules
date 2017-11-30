@@ -2,7 +2,7 @@
 
 gcloud_init()
 {
-    echo "gcloud.init + $@"
+    echo "gcloud.init"
 }
 
-gcloud_init $@
+gcloud_init "$@"

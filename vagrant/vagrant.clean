@@ -2,9 +2,9 @@
 
 vagrant_clean()
 {
-    vagrant global-status --prune
-    find ~ -name .vagrant -exec rm -dr {} +
-    killall VBoxHeadless
+#    vagrant global-status --prune
+#    find ~ -name .vagrant -exec rm -dr {} +
+#    killall VBoxHeadless
 
 }
 

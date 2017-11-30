@@ -7,9 +7,9 @@ IFS=$'\r\n' checks=($(cat ${VERIFY_CHECKS}))
 do_check()
 {
     oldIFS=$IFS
-    set -f
-    IFS=':' a=($1)	# create array from  $1
-    set +f		# disable globbing
+    set -f		# disable globbing
+    IFS=':' a=($1)	# split to  array
+    set +f		# enable globbing
     f=(${a[0]})
     set -f
     if [ -f ${f[0]} ]	# if file exist
