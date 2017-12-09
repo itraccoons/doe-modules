@@ -1,18 +1,16 @@
 #!/bin/sh 
 
-HELP="doe docker env -c <COMMAND> \n "
+help="doe docker env -c <COMMAND> \n "
 docker_env_opts="c:h"
+mod_datadir=$DOE_MODDIR/docker/.data
+
 
 docker_env()
 {
     while getopts $docker_env_opts o; do
 	case $o in
-	    '?'|'h')
-		echo $HELP && exit 1
-		;;
-	    $o)
-		eval arg_opt_$o=${OPTARG}
-		;;
+	    '?'|'h' ) echo $help && exit 1 ;;
+	    $o      ) eval arg_opt_$o=${OPTARG} ;;
 	esac
     done
 
@@ -20,18 +18,18 @@ docker_env()
     case $arg_opt_c in 
 	up)
 	    [ -d "$tmp" ] || mkdir -p $tmp
-	    cp $(dirname ${BASH_SOURCE[0]})/.data/Vagrantfile $tmp/
+	    cp ${mod_datadir}/Vagrantfile $tmp/
 	    cd $tmp/ && vagrant up && vagrant ssh
 	    echo "Check your env at  http://portainer.doe.cloud:9000/"
 	    ;;
-	halt|destroy|ssh|provision)
+	ssh|halt|destroy|provision)
 	    cd $tmp && vagrant $arg_opt_c
 	    ;;
 	pwd)
 	    echo $tmp/
 	    ;;
 	*)
-	    echo ${HELP}
+	    echo ${help}
 	    ;;
 	
     esac

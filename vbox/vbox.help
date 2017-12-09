@@ -2,7 +2,7 @@
 
 sub vbox_help
 {
-    print "vbox.help + @_";
+    print "vbox.help + @_]";
 }
 
 vbox_help(@ARGV);

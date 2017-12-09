@@ -1,0 +1,36 @@
+#!/bin/sh
+
+help="${RED}doe quick ubuntu [-c <COMMAND>}\nCommands = { up ssh halt destroy provision }${NC}"
+mod_datadir=$DOE_MODDIR/quick/.data
+mod_tempdir=$DOE_TEMPDIR/quick/
+
+quick_ubuntu_opts="h"
+
+quick_ubuntu()
+{
+    while getopts $quick_ubuntu_opts o; do
+	case $o in
+	    '?'|'h' ) echo "$help" && return 1 ;;
+	    $o      ) eval arg_opt_$o=${OPTARG} ;;
+	esac
+    done
+
+    cmd=${arg_opt_c}
+    tmp=${mod_tempdir}/ubuntu
+
+    [ -d ${tmp} ] || mkdir -p ${tmp}
+
+    case $cmd in
+	up)
+	    release=${arg_opt_r:=xenail64}
+	    cd ${tmp} && vagrant init ubuntu/$release --minimal --force && vagrant up
+	    ;;
+	ssh|halt|destroy|provision)
+	    cd ${tmp} && vagrant $cmd
+	    ;;
+	*)
+	    echo $help
+	    ;;
+}
+
+quick_ubuntu "$@" || exit 1

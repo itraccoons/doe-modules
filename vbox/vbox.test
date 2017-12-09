@@ -1,0 +1,21 @@
+#!/bin/bash 
+
+help="${RED}doe vbox test .....${NC}"
+mod_datadir=$DOE_MODDIR/vbox/.data
+
+vbox_test_opts="h"
+
+vbox_test()
+{
+    while getopts $vbox_test_opts o; do
+	case $o in
+	    '?'|'h' ) echo "$help" && return 1 ;;
+	    $o      ) eval arg_opt_$o=${OPTARG} ;;
+	esac
+    done
+
+    echo "Your function with agruments"
+    declare -p | grep arg_opt_
+}
+
+vbox_test "$@" || exit 1
