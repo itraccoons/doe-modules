@@ -1,7 +1,8 @@
-#!/bin/bash 
+#!/bin/sh
 
-help="${RED}doe vbox test .....${NC}"
-mod_datadir=$DOE_MODDIR/vbox/.data
+help="doe vbox test ..."
+mod_datadir=$HOME/doe/modules/vbox/.data
+mod_tempdir=$HOME/doe/.tmp/vbox
 
 vbox_test_opts="h"
 
@@ -14,8 +15,7 @@ vbox_test()
 	esac
     done
 
-    echo "Your function with agruments"
-    declare -p | grep arg_opt_
+    echo "Your function with your agruments"
 }
 
 vbox_test "$@" || exit 1

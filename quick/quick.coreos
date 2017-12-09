@@ -1,8 +1,8 @@
 #!/bin/sh
 
-help="${RED}doe quick coreos [-c up|ssh|halt|destroy|provision|config]${NC}"
-mod_datadir=$DOE_MODDIR/quick/.data
-mod_tempdir=$DOE_TMPDIR/quick
+help="doe quick coreos [-c up|ssh|halt|destroy|provision|config]"
+mod_datadir=$HOME/doe/modules/quick/.data
+mod_tempdir=$HOME/doe/.tmp/quick
 
 quick_coreos_opts="c:h"
 
