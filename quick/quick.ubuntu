@@ -30,15 +30,19 @@ quick_ubuntu()
 	    cd ${tmp} && vagrant init ubuntu/$release --minimal --force && vagrant up
 	    ;;
 	ssh|halt|provision)
-	    [ -f $tmp/Vagrantfile ] || die
+	    [ -f ${tmp}/Vagrantfile ] || die
 	    cd ${tmp} && vagrant $cmd
 	    ;;
 	destroy)
-	    [ -f $tmp/Vagrantfile ] || die
+	    [ -f ${tmp}/Vagrantfile ] || die
 	    cd ${tmp} && vagrant $cmd
 	    rm -rf ${tmp}
 	    ;;
-	*)
+	config)
+	    [ -f ${tmp}/Vagrantfile ] || die
+	    echo ${tmp}/Vagrantfile
+	    ;;
+	*)  
 	    echo $help
 	    ;;
     esac
