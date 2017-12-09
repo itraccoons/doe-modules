@@ -20,12 +20,14 @@ quick_docker()
 	    $o      ) eval arg_opt_$o=${OPTARG} ;;
 	esac
     done
+    shift $(($OPTIND - 1))
 
     tmp=${mod_tempdir}/docker
     cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
 	    [ -d ${tmp} ] || mkdir -p ${tmp}
+	    #cd ${tmp} && vagrant init hashicorp/boot2docker --minimal --force && vagrant up	#password: tcuser
 	    cp ${mod_datadir}/Vagrantfile.docker $tmp/Vagrantfile
 	    cd $tmp && vagrant up
 	    echo "Check your env at  http://portainer.doe.cloud:9000/"

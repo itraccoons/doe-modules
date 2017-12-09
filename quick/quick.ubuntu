@@ -20,6 +20,7 @@ quick_ubuntu()
 	    $o      ) eval arg_opt_$o=${OPTARG} ;;
 	esac
     done
+    shift $((OPTIND-1))
 
     tmp=${mod_tempdir}/ubuntu
     cmd=${arg_opt_c:=up}

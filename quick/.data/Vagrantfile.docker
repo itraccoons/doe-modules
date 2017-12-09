@@ -9,7 +9,9 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   config.vm.define instance_name do |c|
     c.vm.hostname = instance_name
     c.vm.box = vm_box
+#    c.vm.network :public_network, bridge: "en1: Wi-Fi (AirPort)"
     c.vm.network :forwarded_port, guest: 9000, host: 9000
+    c.vm.network :forwarded_port, guest: 8080, host: 8080
 
     c.vm.provider :virtualbox do |vb|
       vb.gui = false
@@ -21,6 +23,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
     c.vm.provision :docker do |d| 
       d.run "portainer", image: "portainer/portainer", args: "-p 9000:9000 -v '/var/run/docker.sock:/var/run/docker.sock'"
+      d.run "cadvisor", image: "google/cadvisor:latest", args: "-p 8080:8080 -v '/:/rootfs:ro' -v '/var/run:/var/run:rw' -v '/sys:/sys:ro' -v '/var/lib/docker/:/var/lib/docker:ro' -v '/dev/disk/:/dev/disk:ro'"
     end
   end
 end
