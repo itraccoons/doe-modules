@@ -1,10 +1,16 @@
 #!/bin/sh
 
-help="${RED}doe quick ubuntu [-c <COMMAND>}\nCommands = { up ssh halt destroy provision }${NC}"
+help="${RED}doe quick ubuntu [-c up|ssh|halt|destroy|provision]${NC}"
 mod_datadir=$DOE_MODDIR/quick/.data
-mod_tempdir=$DOE_TEMPDIR/quick/
+mod_tempdir=$DOE_TMPDIR/quick
 
-quick_ubuntu_opts="h"
+quick_ubuntu_opts="c:r:h"
+
+die()
+{
+    echo "No Ubuntu. Run 'doe quick ubuntu -c up' first"
+    exit 1
+}
 
 quick_ubuntu()
 {
@@ -15,22 +21,27 @@ quick_ubuntu()
 	esac
     done
 
-    cmd=${arg_opt_c}
     tmp=${mod_tempdir}/ubuntu
-
-    [ -d ${tmp} ] || mkdir -p ${tmp}
-
+    cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
-	    release=${arg_opt_r:=xenail64}
+	    [ -d ${tmp} ] || mkdir -p ${tmp}
+	    release=${arg_opt_r:=xenial64}
 	    cd ${tmp} && vagrant init ubuntu/$release --minimal --force && vagrant up
 	    ;;
-	ssh|halt|destroy|provision)
+	ssh|halt|provision)
+	    [ -f $tmp/Vagrantfile ] || die
 	    cd ${tmp} && vagrant $cmd
+	    ;;
+	destroy)
+	    [ -f $tmp/Vagrantfile ] || die
+	    cd ${tmp} && vagrant $cmd
+	    rm -rf ${tmp}
 	    ;;
 	*)
 	    echo $help
 	    ;;
+    esac
 }
 
 quick_ubuntu "$@" || exit 1
