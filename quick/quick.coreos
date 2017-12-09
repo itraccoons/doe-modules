@@ -1,34 +1,32 @@
 #!/bin/sh
 
-help="${RED}doe quick docker [-c up|ssh|halt|destroy|provision]${NC}"
+help="${RED}doe quick coreos [-c up|ssh|halt|destroy|provision|config]${NC}"
 mod_datadir=$DOE_MODDIR/quick/.data
 mod_tempdir=$DOE_TMPDIR/quick
 
-quick_docker_opts="c:r:h"
+quick_coreos_opts="c:h"
 
 die()
 {
-    echo "No Docker. Run 'doe quick docker -c up' first"
+    echo "No CoreOS. Run 'doe quick ubuntu -c up' first"
     exit 1
 }
 
-quick_docker()
+quick_coreos()
 {
-    while getopts $quick_docker_opts o; do
+    while getopts $quick_coreos_opts o; do
 	case $o in
 	    '?'|'h' ) echo "$help" && return 1 ;;
 	    $o      ) eval arg_opt_$o=${OPTARG} ;;
 	esac
     done
 
-    tmp=${mod_tempdir}/docker
+    tmp=${mod_tempdir}/coreos
     cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
-	    [ -d ${tmp} ] || mkdir -p ${tmp}
-	    cp ${mod_datadir}/Vagrantfile.docker $tmp/Vagrantfile
-	    cd $tmp && vagrant up
-	    echo "Check your env at  http://portainer.doe.cloud:9000/"
+	    [ -f ${tmp}/Vagrantfile ] || git clone https://github.com/coreos/coreos-vagrant.git ${tmp}
+	    cd ${tmp} && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die
@@ -45,4 +43,4 @@ quick_docker()
     esac
 }
 
-quick_docker "$@" || exit 1
+quick_coreos "$@" || exit 1

@@ -1,0 +1,26 @@
+instance_name = "quick-docker"
+vm_box = "ubuntu/xenial64"
+vm_memory = 1024
+vm_cpus = 1
+
+VAGRANT_API_VERSION = '2'
+Vagrant.configure(VAGRANT_API_VERSION) do |config|
+
+  config.vm.define instance_name do |c|
+    c.vm.hostname = instance_name
+    c.vm.box = vm_box
+    c.vm.network :forwarded_port, guest: 9000, host: 9000
+
+    c.vm.provider :virtualbox do |vb|
+      vb.gui = false
+      vb.check_guest_additions = false
+      vb.name = instance_name
+      vb.memory = vm_memory
+      vb.cpus = vm_cpus
+    end
+
+    c.vm.provision :docker do |d| 
+      d.run "portainer", image: "portainer/portainer", args: "-p 9000:9000 -v '/var/run/docker.sock:/var/run/docker.sock'"
+    end
+  end
+end

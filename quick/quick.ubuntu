@@ -1,6 +1,6 @@
 #!/bin/sh
 
-help="${RED}doe quick ubuntu [-c up|ssh|halt|destroy|provision]${NC}"
+help="${RED}doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]${NC}"
 mod_datadir=$DOE_MODDIR/quick/.data
 mod_tempdir=$DOE_TMPDIR/quick
 
@@ -29,14 +29,10 @@ quick_ubuntu()
 	    release=${arg_opt_r:=xenial64}
 	    cd ${tmp} && vagrant init ubuntu/$release --minimal --force && vagrant up
 	    ;;
-	ssh|halt|provision)
+	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die
 	    cd ${tmp} && vagrant $cmd
-	    ;;
-	destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die
-	    cd ${tmp} && vagrant $cmd
-	    rm -rf ${tmp}
+	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
 	config)
 	    [ -f ${tmp}/Vagrantfile ] || die
