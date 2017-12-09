@@ -1,8 +1,0 @@
-#!/bin/sh
-
-gcloud_help()
-{
-    echo "gcloud.help"
-}
-
-gcloud_help "$@"
