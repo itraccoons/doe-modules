@@ -8,7 +8,7 @@ quick_coreos_opts="c:h"
 
 die()
 {
-    echo "No CoreOS. Run 'doe quick ubuntu -c up' first"
+    echo "No CoreOS. Run 'doe quick coreos -c up' first"
     exit 1
 }
 
