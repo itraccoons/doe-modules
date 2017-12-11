@@ -27,7 +27,14 @@ quick_coreos()
     case $cmd in
 	up)
 	    [ -f ${tmp}/Vagrantfile ] || git clone https://github.com/coreos/coreos-vagrant.git ${tmp}
-	    cd ${tmp} && vagrant up
+	    cd ${tmp}
+	    cp user-data.sample user-data
+	    cp config.rb.sample config.rb
+	    vagrant up
+	    vagrant ssh -c 'sudo coreos-cloudinit --from-file=/var/lib/coreos-vagrant/vagrantfile-user-data'
+	    echo "Add Docker Host variable"
+	    echo "export DOCKER_HOST=tcp://172.17.8.101:2375"
+#	    cd ${tmp} && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die
