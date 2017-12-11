@@ -1,4 +1,10 @@
 #!/bin/sh
 
-connect_to=$(basename $0 | cut -d'.' -f2)
-doe quick ${connect_to} -c ssh -- --command "$1"
+func=$(basename $0 | cut -d'.' -f2)
+help="Usage: doe exec $func <command>"
+
+if [ $# -eq 0 ]; then
+    echo "${help}"
+else
+    doe quick ${func} -c ssh -- --command $1
+fi

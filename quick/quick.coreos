@@ -8,7 +8,7 @@ quick_coreos_opts="c:h"
 
 die()
 {
-    echo "No CoreOS. Run 'doe quick coreos -c up' first"
+    echo $1 
     exit 1
 }
 
@@ -37,12 +37,12 @@ quick_coreos()
 #	    cd ${tmp} && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die
+	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
 	    cd ${tmp} && vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
 	config)
-	    [ -f ${tmp}/Vagrantfile ] || die
+	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
 	    echo ${tmp}/Vagrantfile
 	    ;;
 	*)  
