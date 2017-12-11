@@ -1,6 +1,6 @@
 #!/bin/sh
 
-help="doe quick docker [-c up|ssh|halt|destroy|provision]"
+help="Usage: doe quick docker [-c up|ssh|halt|destroy|provision]"
 mod_datadir=$HOME/doe/modules/quick/.data
 mod_tempdir=$HOME/doe/.tmp/quick
 

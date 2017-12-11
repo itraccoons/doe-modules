@@ -1,6 +1,6 @@
 #!/bin/sh
 
-help="doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]"
+help="Usage: doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]"
 mod_datadir=$HOME/doe/modules/quick/.data
 mod_tempdir=$HOME/doe/.tmp/quick
 
