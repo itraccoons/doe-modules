@@ -1,0 +1,4 @@
+#!/bin/sh
+
+connect_to=$(basename $0 | cut -d'.' -f2)
+doe quick ${connect_to} -c ssh

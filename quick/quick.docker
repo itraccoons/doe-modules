@@ -33,15 +33,14 @@ quick_docker()
 	    echo "Check your env at  http://portainer.doe.cloud:9000/"
 	    ;;
 	ssh|halt|provision|destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die
-	    cd ${tmp} && vagrant $cmd
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
+	    cd ${tmp} && vagrant $cmd "$@"
 	    ;;
 	config)
 	    [ -f ${tmp}/Vagrantfile ] || die
 	    echo ${tmp}/Vagrantfile
 	    ;;
-	*)  
+	*)
 	    echo $help
 	    ;;
     esac

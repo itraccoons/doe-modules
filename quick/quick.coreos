@@ -38,7 +38,7 @@ quick_coreos()
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die
-	    cd ${tmp} && vagrant $cmd
+	    cd ${tmp} && vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
 	config)

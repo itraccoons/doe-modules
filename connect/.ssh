@@ -1,4 +1,0 @@
-#!/bin/sh
-
-to=$(basename $0 | cut -d'.' -f2)
-doe quick $to -c ssh
