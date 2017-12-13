@@ -1,0 +1,17 @@
+#!/bin/sh
+
+install_kubectl()
+{
+    os=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+    if [ ! -x "$(which kubectl)" ]; then
+        kubectl_latest=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+        kubectl_url="https://storage.googleapis.com/kubernetes-release/release/${kubectl_latest}/bin/${os}/amd64/kubectl"
+        echo ${kubectl_url}
+        curl -Lo kubectl ${kubectl_url} && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+    else
+	echo "kubectl installed $(which kubectl)"
+    fi
+}
+
+install_kubectl "$@" || exit 1
