@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Install dependencies
+#doe install virtualbox
 doe install kubectl
 
 install_minikube()

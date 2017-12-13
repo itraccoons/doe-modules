@@ -1,0 +1,8 @@
+#!/bin/sh
+
+install_virtualbox()
+{
+    echo "Write your function here"
+}
+
+install_virtualbox "$@" || exit 1
