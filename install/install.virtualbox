@@ -8,7 +8,9 @@ install_virtualbox()
 
     tmp=${mod_tempdir}/virtualbox
     [ -d ${tmp} ] || mkdir -p ${tmp}
+
     ansible-galaxy install --roles-path ${tmp} FGtatsuro.virtualbox
+    ansible-playbook -i "localhost," -c local ${mod_datadir}/virtualbox.yml 
 }
 
 install_virtualbox "$@" || exit 1
