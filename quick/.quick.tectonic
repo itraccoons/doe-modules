@@ -39,10 +39,6 @@ quick_coreos()
 	    cd ${tmp} && vagrant $cmd $@
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
-	config)
-	    [ -f ${tmp}/Vagrantfile ] || die
-	    echo ${tmp}/Vagrantfile
-	    ;;
 	*)  
 	    echo $help
 	    ;;

@@ -34,16 +34,12 @@ quick_coreos()
 	    vagrant ssh -c 'sudo coreos-cloudinit --from-file=/var/lib/coreos-vagrant/vagrantfile-user-data'
 	    echo "Add Docker Host variable"
 	    echo "export DOCKER_HOST=tcp://172.17.8.101:2375"
-#	    cd ${tmp} && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
-	    cd ${tmp} && vagrant $cmd "$@"
+	    cd ${tmp}
+	    eval vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
-	    ;;
-	config)
-	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
-	    echo ${tmp}/Vagrantfile
 	    ;;
 	*)  
 	    echo $help

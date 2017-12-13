@@ -32,10 +32,11 @@ quick_ubuntu()
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
-	    cd ${tmp} && vagrant $cmd "$@"
+	    cd ${tmp}
+	    eval vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
-	config)
+	ssh-c)
 	    [ -f ${tmp}/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
 	    echo ${tmp}/Vagrantfile
 	    ;;

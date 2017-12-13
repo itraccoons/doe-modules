@@ -17,5 +17,4 @@ install_minikube()
     fi
 }
 
-#dependencies
 install_minikube "$@" || exit 1

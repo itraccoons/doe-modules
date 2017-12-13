@@ -29,17 +29,15 @@ quick_docker()
 	    [ -d ${tmp} ] || mkdir -p ${tmp}
 	    #cd ${tmp} && vagrant init hashicorp/boot2docker --minimal --force && vagrant up	#password: tcuser
 	    cp ${mod_datadir}/Vagrantfile.docker $tmp/Vagrantfile
-	    cd $tmp && vagrant up
+	    cd ${tmp}
+	    vagrant up
 	    echo "Check your env at  http://portainer.doe.cloud:9000/"
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die "No Docker. Run 'doe quick docker -c up' first"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
-	    cd ${tmp} && vagrant $cmd "$@"
-	    ;;
-	config)
-	    [ -f ${tmp}/Vagrantfile ] || die "No Docker. Run 'doe quick docker -c up' first"
-	    echo ${tmp}/Vagrantfile
+	    cd ${tmp}
+	    eval vagrant $cmd "$@"
 	    ;;
 	*)
 	    echo $help

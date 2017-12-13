@@ -6,5 +6,5 @@ help="Usage: doe exec $func <command>"
 if [ $# -eq 0 ]; then
     echo "${help}"
 else
-    doe quick ${func} -c ssh -- --command $1
+    doe quick ${func} -c ssh -- --command \'$@\'
 fi
