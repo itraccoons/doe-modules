@@ -1,8 +1,14 @@
 #!/bin/sh
 
+mod_datadir=$HOME/doe/modules/install/.data
+mod_tempdir=$HOME/doe/.tmp/install
+
 install_virtualbox()
 {
-    echo "Write your function here"
+
+    tmp=${mod_tempdir}/virtualbox
+    [ -d ${tmp} ] || mkdir -p ${tmp}
+    ansible-galaxy install --roles-path ${tmp} FGtatsuro.virtualbox
 }
 
 install_virtualbox "$@" || exit 1
