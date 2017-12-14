@@ -1,0 +1,8 @@
+#!/bin/sh
+
+install_gcloud()
+{
+    curl https://sdk.cloud.google.com | bash
+}
+
+install_gcloud "$@" || exit 1
