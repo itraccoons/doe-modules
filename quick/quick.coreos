@@ -1,6 +1,6 @@
 #!/bin/sh
 
-help="Usage: doe quick coreos [-c up|ssh|halt|destroy|provision|config]"
+help="Usage: doe quick coreos [-c up|ssh|halt|destroy|provision|env]"
 mod_datadir=$HOME/doe/modules/quick/.data
 mod_tempdir=$HOME/doe/.tmp/quick
 
@@ -32,14 +32,15 @@ quick_coreos()
 	    cp config.rb.sample config.rb
 	    vagrant up
 	    vagrant ssh -c 'sudo coreos-cloudinit --from-file=/var/lib/coreos-vagrant/vagrantfile-user-data'
-	    echo "Add Docker Host variable"
-	    echo "export DOCKER_HOST=tcp://172.17.8.101:2375"
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
 	    cd ${tmp}
 	    eval vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
+	    ;;
+	env)
+	    echo "export DOCKER_HOST=tcp://172.17.8.101:2375"
 	    ;;
 	*)  
 	    echo $help

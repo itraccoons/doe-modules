@@ -36,10 +36,6 @@ quick_ubuntu()
 	    eval vagrant $cmd "$@"
 	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
 	    ;;
-	ssh-c)
-	    [ -f ${tmp}/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
-	    echo ${tmp}/Vagrantfile
-	    ;;
 	*)  
 	    echo $help
 	    ;;

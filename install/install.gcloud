@@ -1,8 +1,14 @@
 #!/bin/sh
 
+. $HOME/doe/lib/common/functions
+
 install_gcloud()
 {
-    curl https://sdk.cloud.google.com | bash
+    if command_exists gcloud; then
+	gcloud version
+    else
+	curl https://sdk.cloud.google.com | bash
+    fi
 }
 
 install_gcloud "$@" || exit 1

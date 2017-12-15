@@ -1,19 +1,20 @@
 #!/bin/sh
 
+. $HOME/doe/lib/common/functions
+
 # Install dependencies
 #doe install virtualbox
 doe install kubectl
 
 install_minikube()
 {
-    os=$(uname -s | tr '[:upper:]' '[:lower:]')
-
-    if [ ! -x "$(which minikube)" ]; then
+    if command_exists minikube; then
+	minikube version
+    else
+	os="$( uname -s  | tr '[:upper:]' '[:lower:]' )"
 	minikube_url="https://storage.googleapis.com/minikube/releases/latest/minikube-${os}-amd64"
 	echo ${minikube_url}
 	curl -Lo minikube ${minikube_url} && chmod +x minikube && sudo mv minikube /usr/local/bin/
-    else
-	echo "minikube installed $(which minikube)"
     fi
 }
 
