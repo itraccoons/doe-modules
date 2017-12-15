@@ -1,4 +1,4 @@
 #!/bin/sh
 
 func=$(basename $0 | cut -d'.' -f2)
-echo "source <( $func completion bash )"
+echo "source <( $func completion $(basename $SHELL) )"
