@@ -1,8 +1,0 @@
-#!/usr/bin/perl
-
-sub vbox_help
-{
-    print "vbox.help + @_]";
-}
-
-vbox_help(@ARGV);
