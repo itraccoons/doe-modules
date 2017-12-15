@@ -1,3 +1,1 @@
-#!/bin/sh
-
-echo ". $HOME/doe/completion.$(basename $SHELL).inc"
+.completion.common

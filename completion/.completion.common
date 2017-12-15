@@ -1,4 +1,14 @@
 #!/bin/sh
 
 func=$(basename $0 | cut -d'.' -f2)
-echo ". <( $func completion $(basename $SHELL) )"
+case $func in
+    doe)
+	completion=". $HOME/doe/completion.$(basename $SHELL).inc"
+	;;
+    $func)
+	completion=". <( $func completion $(basename $SHELL) )"
+	;;
+esac
+
+echo $completion
+
