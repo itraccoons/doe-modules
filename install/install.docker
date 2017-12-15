@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. $HOME/doe/lib/common/functions
+
+install_docker()
+{
+    if command_exists docker; then
+	docker --version
+    else
+	os="$( uname -s  | tr '[:upper:]' '[:lower:]' )"
+	case $os in
+	    linux ) curl -fsSL get.docker.com | sudo sh ;;
+	    darwin)
+		#https://download.docker.com/mac/stable/Docker.dmg
+		#https://download.docker.com/mac/stable/DockerToolbox.pkg 
+		;;
+	esac
+    fi
+}
+
+install_docker "$@" || exit 1

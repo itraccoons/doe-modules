@@ -7,7 +7,7 @@ install_gcloud()
     if command_exists gcloud; then
 	gcloud version
     else
-	curl https://sdk.cloud.google.com | bash
+	curl https://sdk.cloud.google.com | sh
     fi
 }
 
