@@ -1,0 +1,24 @@
+#!/bin/sh
+
+install_python()
+{
+    if command_exist python; then
+	python --version
+    else
+	os="$( uname -s | tr '[:upper:]' '[:lower:]' )"
+	case $os in
+	    linux)
+		lsb_dist="$( get_distribution | tr '[:upper:]' '[:lower:]' )"
+		if [ "$lsb_dist" = "ubuntu" ]; then
+		    sudo apt-get update
+		    sudo apt-get -y install python-minimal
+		fi
+		;;
+	    darwin)
+		python --version
+		;;
+	esac
+    fi
+}
+
+install_python "$@" || exit 1
