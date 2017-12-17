@@ -4,7 +4,7 @@
 
 install_python()
 {
-    if command_exist python; then
+    if command_exists python; then
 	python --version
     else
 	os="$( uname -s | tr '[:upper:]' '[:lower:]' )"
