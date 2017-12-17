@@ -1,0 +1,24 @@
+#!/bin/sh
+
+install_shellcheck()
+{
+    if command_exists shellcheck; then
+	shellcheck --version
+    else
+	os="$( uname -s | tr '[:upper:]' '[:lower:]' )"
+	case $os in
+	    linux)
+		lsb_dist="$( get_distribution | tr '[:upper:]' '[:lower:]' )"
+		if [ "$lsb_dist" = "ubuntu" ]; then
+		    sudo apt-get update
+		    sudo apt-get -y install shellcheck
+		fi
+		;;
+	    darwin)
+		shellcheck --version
+		;;
+	esac
+    fi
+}
+
+install_shellcheck "$@" || exit 1
