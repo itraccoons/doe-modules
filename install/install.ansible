@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/doe/lib/common/functions
+. $HOME/doe/modules/.lib/functions
 
 install_ansible()
 {

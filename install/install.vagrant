@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/doe/lib/common/functions
+. $HOME/doe/modules/.lib/functions
 
 mod_datadir=$HOME/doe/modules/install/.data
 mod_tempdir=$HOME/doe/.tmp/install

@@ -6,7 +6,7 @@ case $func in
 	completion=". $HOME/doe/completion.$(basename $SHELL).inc"
 	;;
     $func)
-	completion=". <( $func completion $(basename $SHELL) )"
+	completion=". <($func completion $(basename $SHELL))"
 	;;
 esac
 
