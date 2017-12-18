@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 VERIFY_CHECKS=$( dirname ${BASH_SOURCE[0]} )/.data/verify_checks
 
 IFS=$'\r\n' checks=($(cat ${VERIFY_CHECKS}))
