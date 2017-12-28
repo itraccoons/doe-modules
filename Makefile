@@ -1,3 +1,3 @@
 .PHONY: shellcheck
 shellcheck: ## run shellcheck validation
-	.ci/scripts/validate/shellcheck
+	.circleci/scripts/validate/shellcheck

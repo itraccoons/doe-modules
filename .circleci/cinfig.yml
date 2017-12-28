@@ -13,7 +13,7 @@ jobs:
       - run:
           name: "Run shellcheck"
           command: |
-            dockerfile=.ci/dockerfiles/Dockerfile.shellcheck
+            dockerfile=.circleci/dockerfiles/Dockerfile.shellcheck
             echo "COPY . ." >> $dockerfile
             docker build -f $dockerfile --tag cli-validator:$CIRCLE_BUILD_NUM .
             docker run --rm \
