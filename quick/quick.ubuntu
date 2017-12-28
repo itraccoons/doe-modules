@@ -22,8 +22,8 @@ quick_ubuntu()
     done
     shift $((OPTIND-1))
 
-    tmp="${mod_tempdir}"/ubuntu
-    cmd="${arg_opt_c:=up}"
+    tmp=${mod_tempdir}/ubuntu
+    cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
 	    [ -d "$tmp" ] || mkdir -p "$tmp"
