@@ -21,13 +21,13 @@ quick_ubuntu()
     done
     shift $((OPTIND-1))
 
-    tmp=${mod_tempdir}/ubuntu
-    cmd=${arg_opt_c:=up}
+    tmp="${mod_tempdir}"/ubuntu
+    cmd="${arg_opt_c:=up}"
     case $cmd in
 	up)
 	    [ -d "$tmp" ] || mkdir -p "$tmp"
-	    release=${arg_opt_r:=xenial64}
-	    cd "$tmp" && vagrant init ubuntu/$release --minimal --force && vagrant up
+	    release="${arg_opt_r:=xenial64}"
+	    cd "$tmp" && vagrant init ubuntu/"$release" --minimal --force && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
 	    [ -f "$tmp"/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
