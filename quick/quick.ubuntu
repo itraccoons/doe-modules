@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # shellcheck disable=SC2154
 
 help="Usage: doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]"
