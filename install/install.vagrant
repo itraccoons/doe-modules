@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1090
 
-. "$HOME"/doe/modules/.lib/functions
+. "$HOME"/.doe/modules/.lib/functions
 
 mod_datadir=$HOME/doe/modules/install/.data
 mod_tempdir=$HOME/doe/.tmp/install
