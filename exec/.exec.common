@@ -1,10 +1,12 @@
 #!/bin/sh
 
-func=$(basename $0 | cut -d'.' -f2)
+# shellcheck disable=SC2068,SC2145
+
+func="$(basename "$0" | cut -d'.' -f2)"
 help="Usage: doe exec $func <command>"
 
 if [ $# -eq 0 ]; then
     echo "${help}"
 else
-    doe quick ${func} -c ssh -- --command \'$@\'
+    doe quick "${func}" -c ssh -- --command \'$@\'
 fi

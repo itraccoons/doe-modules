@@ -1,17 +1,19 @@
 #!/bin/sh
 
-. $HOME/doe/modules/.lib/functions
+# shellcheck disable=SC1090
+
+. "$HOME"/doe/modules/.lib/functions
 
 install_kubectl()
 {
     if command_exists kubectl; then
-	echo "$( which kubectl )"
+	which kubectl
     else
 	os="$( uname -s | tr '[:upper:]' '[:lower:]' )"
         kubectl_latest=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
         kubectl_url="https://storage.googleapis.com/kubernetes-release/release/${kubectl_latest}/bin/${os}/amd64/kubectl"
-        echo ${kubectl_url}
-        curl -Lo kubectl ${kubectl_url} && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+        echo "${kubectl_url}"
+        curl -Lo kubectl "${kubectl_url}" && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
     fi
 }
 

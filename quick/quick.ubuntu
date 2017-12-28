@@ -1,14 +1,13 @@
 #!/bin/sh
 
 help="Usage: doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]"
-mod_datadir=$HOME/.doe/modules/quick/.data
 mod_tempdir=$HOME/.doe/.tmp/quick
 
 quick_ubuntu_opts="c:r:h"
 
 die()
 {
-    echo $1
+    echo "$1"
     exit 1
 }
 
@@ -17,7 +16,7 @@ quick_ubuntu()
     while getopts $quick_ubuntu_opts o; do
 	case $o in
 	    '?'|'h' ) echo "$help" && return 1 ;;
-	    $o      ) eval arg_opt_$o=${OPTARG} ;;
+	    $o      ) eval arg_opt_"$o"="${OPTARG}" ;;
 	esac
     done
     shift $((OPTIND-1))
@@ -26,18 +25,18 @@ quick_ubuntu()
     cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
-	    [ -d ${tmp} ] || mkdir -p ${tmp}
+	    [ -d "$tmp" ] || mkdir -p "$tmp"
 	    release=${arg_opt_r:=xenial64}
-	    cd ${tmp} && vagrant init ubuntu/$release --minimal --force && vagrant up
+	    cd "$tmp" && vagrant init ubuntu/$release --minimal --force && vagrant up
 	    ;;
 	ssh|halt|provision|destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
-	    cd ${tmp}
+	    [ -f "$tmp"/Vagrantfile ] || die "No Ubuntu. Run 'doe quick ubuntu -c up' first"
+	    cd "$tmp" || die "Can't cd $tmp"
 	    eval vagrant $cmd "$@"
-	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
+	    [ "$cmd" = "destroy" ] && rm -rf "$tmp"
 	    ;;
 	*)  
-	    echo $help
+	    echo "$help"
 	    ;;
     esac
 }

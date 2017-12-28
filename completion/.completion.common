@@ -1,14 +1,14 @@
 #!/bin/sh
 
-func=$(basename $0 | cut -d'.' -f2)
-case $func in
+func="$(basename "$0" | cut -d'.' -f2)"
+case "$func" in
     doe)
-	completion=". $HOME/doe/completion.$(basename $SHELL).inc"
+	completion=". $HOME/doe/completion.$(basename "$SHELL").inc"
 	;;
     $func)
-	completion=". <($func completion $(basename $SHELL))"
+	completion=". <($func completion $(basename "$SHELL"))"
 	;;
 esac
 
-echo $completion
+echo "$completion"
 

@@ -1,6 +1,8 @@
 #!/bin/sh
 
-. $HOME/doe/modules/.lib/functions
+# shellcheck disable=SC1090
+
+. "$HOME"/doe/modules/.lib/functions
 
 # Install dependencies
 #doe install virtualbox
@@ -13,8 +15,8 @@ install_minikube()
     else
 	os="$( uname -s  | tr '[:upper:]' '[:lower:]' )"
 	minikube_url="https://storage.googleapis.com/minikube/releases/latest/minikube-${os}-amd64"
-	echo ${minikube_url}
-	curl -Lo minikube ${minikube_url} && chmod +x minikube && sudo mv minikube /usr/local/bin/
+	echo "${minikube_url}"
+	curl -Lo minikube "${minikube_url}" && chmod +x minikube && sudo mv minikube /usr/local/bin/
     fi
 }
 

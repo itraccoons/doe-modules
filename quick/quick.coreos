@@ -1,14 +1,13 @@
 #!/bin/sh
 
 help="Usage: doe quick coreos [-c up|ssh|halt|destroy|provision|env]"
-mod_datadir=$HOME/doe/modules/quick/.data
 mod_tempdir=$HOME/doe/.tmp/quick
 
 quick_coreos_opts="c:h"
 
 die()
 {
-    echo $1 
+    echo "$1"
     exit 1
 }
 
@@ -17,33 +16,33 @@ quick_coreos()
     while getopts $quick_coreos_opts o; do
 	case $o in
 	    '?'|'h' ) echo "$help" && return 1 ;;
-	    $o      ) eval arg_opt_$o=${OPTARG} ;;
+	    $o      ) eval arg_opt_"$o"="${OPTARG}" ;;
 	esac
     done
-    shift $(($OPTIND - 1))
+    shift $((OPTIND - 1))
 
     tmp=${mod_tempdir}/coreos
     cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
-	    [ -f ${tmp}/Vagrantfile ] || git clone https://github.com/coreos/coreos-vagrant.git ${tmp}
-	    cd ${tmp}
+	    [ -f "$tmp"/Vagrantfile ] || git clone https://github.com/coreos/coreos-vagrant.git "$tmp"
+	    cd "$tmp" || die "Can't cd $tmp"
 	    cp user-data.sample user-data
 	    cp config.rb.sample config.rb
 	    vagrant up
 	    vagrant ssh -c 'sudo coreos-cloudinit --from-file=/var/lib/coreos-vagrant/vagrantfile-user-data'
 	    ;;
 	ssh|halt|provision|destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
-	    cd ${tmp}
-	    eval vagrant $cmd "$@"
-	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
+	    [ -f "$tmp"/Vagrantfile ] || die "No CoreOS. Run 'doe quick coreos -c up' first"
+	    cd "$tmp" || die "Can't cd $tmp"
+	    eval vagrant "$cmd" "$@"
+	    [ "$cmd" = "destroy" ] && rm -rf "$tmp"
 	    ;;
 	env)
 	    echo "export DOCKER_HOST=tcp://172.17.8.101:2375"
 	    ;;
 	*)  
-	    echo $help
+	    echo "$help"
 	    ;;
     esac
 }

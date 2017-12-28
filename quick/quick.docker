@@ -8,7 +8,7 @@ quick_docker_opts="c:r:h"
 
 die()
 {
-    echo $1
+    echo "$1"
     exit 1
 }
 
@@ -17,30 +17,30 @@ quick_docker()
     while getopts $quick_docker_opts o; do
 	case $o in
 	    '?'|'h' ) echo "$help" && return 1 ;;
-	    $o      ) eval arg_opt_$o=${OPTARG} ;;
+	    $o      ) eval arg_opt_"$o"="${OPTARG}" ;;
 	esac
     done
-    shift $(($OPTIND - 1))
+    shift $((OPTIND - 1))
 
     tmp=${mod_tempdir}/docker
     cmd=${arg_opt_c:=up}
     case $cmd in
 	up)
-	    [ -d ${tmp} ] || mkdir -p ${tmp}
+	    [ -d "$tmp" ] || mkdir -p "$tmp"
 	    #cd ${tmp} && vagrant init hashicorp/boot2docker --minimal --force && vagrant up	#password: tcuser
-	    cp ${mod_datadir}/Vagrantfile.docker $tmp/Vagrantfile
-	    cd ${tmp}
+	    cp "$mod_datadir"/Vagrantfile.docker "$tmp"/Vagrantfile
+	    cd "$tmp" || die "Can't cd $tmp"
 	    vagrant up
 	    echo "Check your env at  http://portainer.doe.cloud:9000/"
 	    ;;
 	ssh|halt|provision|destroy)
-	    [ -f ${tmp}/Vagrantfile ] || die "No Docker. Run 'doe quick docker -c up' first"
-	    [ "$cmd" = "destroy" ] && rm -rf ${tmp}
-	    cd ${tmp}
-	    eval vagrant $cmd "$@"
+	    [ -f "$tmp"/Vagrantfile ] || die "No Docker. Run 'doe quick docker -c up' first"
+	    [ "$cmd" = "destroy" ] && rm -rf "$tmp"
+	    cd "$tmp" || die "Cant cd $tmp"
+	    eval vagrant "$cmd" "$@"
 	    ;;
 	*)
-	    echo $help
+	    echo "$help"
 	    ;;
     esac
 }

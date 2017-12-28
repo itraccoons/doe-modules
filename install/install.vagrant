@@ -1,6 +1,8 @@
 #!/bin/sh
 
-. $HOME/doe/modules/.lib/functions
+# shellcheck disable=SC1090
+
+. "$HOME"/doe/modules/.lib/functions
 
 mod_datadir=$HOME/doe/modules/install/.data
 mod_tempdir=$HOME/doe/.tmp/install
@@ -10,13 +12,13 @@ install_vagrant()
     if command_exists vagrant; then
 	vagrant version
     else
-	tmp=${mod_tempdir}/vagrant
-	[ -d ${tmp} ] || mkdir -p ${tmp}
+	tmp="${mod_tempdir}"/vagrant
+	[ -d "$tmp" ] || mkdir -p "$tmp"
 
-	cp ${mod_datadir}/vagrant.yml ${tmp}/
+	cp "${mod_datadir}"/vagrant.yml "$tmp"/
 
-	ansible-galaxy install --roles-path ${tmp} FGtatsuro.vagrant
-	ansible-playbook -i "localhost," -c local ${tmp}/vagrant.yml
+	ansible-galaxy install --roles-path "$tmp" FGtatsuro.vagrant
+	ansible-playbook -i "localhost," -c local "$tmp"/vagrant.yml
     fi
 }
 

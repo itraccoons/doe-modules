@@ -1,6 +1,8 @@
 #!/bin/sh
 
-. $HOME/doe/modules/.lib/functions
+# shellcheck disable=SC1090
+
+. "$HOME"/doe/modules/.lib/functions
 
 install_docker()
 {
