@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # shellcheck disable=SC2068,SC2145
 
 func="$(basename "$0" | cut -d'.' -f2)"
