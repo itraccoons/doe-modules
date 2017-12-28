@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC2154
 
 help="Usage: doe quick docker [-c up|ssh|halt|destroy|provision]"
 mod_datadir=$HOME/doe/modules/quick/.data
