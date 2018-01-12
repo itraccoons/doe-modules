@@ -1,6 +1,7 @@
 #!/bin/sh
+# shellcheck disable=SC2164
 
-cd ~
+cd ~ 
 if [ ! -d "src" ]; then
     mkdir src
 fi

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+bazel	--output_base=/tmp/bazel/output \
+	--batch build \
+	--javacopt="-target 8 -source 8" \
+	//java{,tests}/google/registry/...
