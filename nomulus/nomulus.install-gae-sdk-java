@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -xe
 
@@ -9,6 +9,6 @@ cd sdks
 curl --output appengine-java-sdk-1.9.60.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.60.zip
 unzip appengine-java-sdk-1.9.60.zip
 rm appengine-java-sdk-1.9.60.zip
-echo "export PATH=$PATH:~/sdks/appengine-java-sdk-1.9.60/bin/" >> ~/.$(basename $SHELL)rc
+echo "export PATH=$PATH:~/sdks/appengine-java-sdk-1.9.60/bin/" >> ~/.bash_profile
 
 set +x
