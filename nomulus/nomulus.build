@@ -3,8 +3,8 @@
 
 set -ex
 
-mkdir /tmp/bazel
-ln -s ~/.cache/bazel/ /tmp/bazel
+[ -d "/tmp/bazel" ] || mkdir /tmp/bazel
+ln -s /tmp/bazel ~/.cache/bazel
 
 cd ~/src/nomulus || exit
 
