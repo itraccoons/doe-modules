@@ -3,6 +3,9 @@
 
 set -ex
 
+mkdir /tmp/bazel
+ln -s ~/.cache/bazel/ /tmp/bazel
+
 cd ~/src/nomulus || exit
 
 bazel	--output_base=/tmp/bazel/output \
