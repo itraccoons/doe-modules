@@ -4,7 +4,9 @@
 set -ex
 
 [ -d "/tmp/bazel" ] || mkdir /tmp/bazel
-ln -s /tmp/bazel ~/.cache/bazel
+if [ ! -L ~/.cache/basel ]; then
+    ln -s /tmp/bazel ~/.cache/bazel
+fi
 
 cd ~/src/nomulus || exit
 
