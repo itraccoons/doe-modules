@@ -4,7 +4,7 @@
 set -ex
 
 [ -d "/tmp/bazel" ] || mkdir /tmp/bazel
-if [ ! -L ~/.cache/basel ]; then
+if [ ! -L ~/.cache/bazel ]; then
     ln -s /tmp/bazel ~/.cache/bazel
 fi
 
