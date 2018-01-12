@@ -1,1 +1,10 @@
 #!/bin/sh
+
+DOE_MODDIR=~/.doe/modules
+
+if [ ! -d "$DOE_MODDIR" ]; then
+    git clone https://github.com/itraccoons/doe-modules.git "$DOE_MODDIR"
+else
+    cd "$DOE_MODDIR"
+    git pull
+fi
