@@ -11,7 +11,7 @@ fi
 cd ~/src/nomulus || exit
 
 bazel	--batch build \
-	--javacopt="-target 8 -source 8" \
+	--javacopt=\"-target 8 -source 8\" \
 	//java{,tests}/google/registry/...
 
 set +x
