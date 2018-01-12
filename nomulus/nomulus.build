@@ -3,10 +3,9 @@
 
 set -ex
 
-cd ~/src/nomulus || exit
-
-sh -c "bazel	--output_base=/tmp/bazel/output \
-	--batch build \
+cd ~/src/nomulus && \
+sh -c	"pwd && bazel	--output_base=/tmp/bazel/output \
+	--batch build 
 	--javacopt=\"-target 8 -source 8\" \
 	//java{,tests}/google/registry/..."
 
