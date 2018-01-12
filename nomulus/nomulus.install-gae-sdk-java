@@ -6,9 +6,11 @@ cd ~
 [ -d "sdks" ] || mkdir ~/sdks
 
 cd sdks
-curl --output appengine-java-sdk-1.9.60.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.60.zip
-unzip appengine-java-sdk-1.9.60.zip
-rm appengine-java-sdk-1.9.60.zip
-echo "export PATH="$PATH":~/sdks/appengine-java-sdk-1.9.60/bin/" >> "$HOME"/.bash_profile
+if [ ! -d "appengine-java-sdk-1.9.60" ]; then
+    curl --output appengine-java-sdk-1.9.60.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.60.zip
+    unzip appengine-java-sdk-1.9.60.zip
+    rm appengine-java-sdk-1.9.60.zip
+    echo "export PATH="$PATH":~/sdks/appengine-java-sdk-1.9.60/bin/" >> "$HOME"/.bash_profile
+fi
 
 set +x
