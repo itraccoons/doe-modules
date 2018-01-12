@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd ~
+curl https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.60.zip
+unzip appengine-java-sdk-1.9.60.zip
+echo "export PATH=$PATH:DIRECTORY_PATH/appengine-java-sdk-1.9.60/bin/" >> ~/.$(basename $SHELL)rc
+
