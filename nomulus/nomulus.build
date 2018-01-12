@@ -1,6 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2039
 
+cd ~/src/nomulus || exit
+
 bazel	--output_base=/tmp/bazel/output \
 	--batch build \
 	--javacopt="-target 8 -source 8" \
