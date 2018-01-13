@@ -4,6 +4,7 @@ doe:
     - pull
   nomulus:
     - pull
+    - env
     - build
     - clean
     - update

@@ -2,7 +2,10 @@
 
 set -ex
 
-eval "$(doe nomulus env)"
+if [ x"$NOMULUS_DIR" = x ]; then
+    echo "Run \"eval \$(doe nomulus env)\' first"
+fi
+
 cd "$NOMULUS_DIR" || exit
 
 bazel clean
