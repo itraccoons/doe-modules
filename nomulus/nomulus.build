@@ -1,17 +1,26 @@
-#!/bin/sh
-# shellcheck disable=SC2039
+#!/usr/bin/env bash
 
 set -ex
 
-[ -d "/tmp/bazel" ] || mkdir /tmp/bazel
+if [ ! -d "/tmp/bazel" ]; then
+    mkdir /tmp/bazel
+fi
+
 if [ ! -L ~/.cache/bazel ]; then
     ln -s /tmp/bazel ~/.cache/bazel
 fi
 
-cd ~/src/nomulus || exit
+cd  ~/src/nomulus || exit
 
-bazel	--batch build \
-	--javacopt=\"-target 8 -source 8\" \
-	//java{,tests}/google/registry/...
+bazel   --batch build \
+        --javacopt="-target 8 -source 8" \
+        //java{,tests}/google/registry/...
+
+ARTEFACTS=~/src/nomulus/.artefacts
+if [ -d "$ARTEFACTS" ]; then
+    rm -rf "$ARTEFACTS"
+    mkdir "$ARTEFACTS"
+    mv
+fi
 
 set +x
