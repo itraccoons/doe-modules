@@ -3,7 +3,7 @@ doe:
   modules:
     - pull
   install:
-    - appengine-java-sdk
+    - appengine-java-sdk: 1.9.60
   nomulus:
     - pull
     - env
