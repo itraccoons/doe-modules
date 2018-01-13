@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -ex
+
+cd ~/src/nomulus/ || exit
+
+bazel clean
+
+set +x
