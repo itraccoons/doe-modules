@@ -14,6 +14,6 @@ if [ -d "$PROJECT" ]; then
 fi
 
 mkdir -p "$PROJECT"
-unzip "$NOMULUS_DIR"/.afterfacts/google/registry/registry_alpha.ear -d "$PROJECT"
+unzip "$NOMULUS_DIR"/.artifacts/google/registry/registry_alpha.ear -d "$PROJECT"
 
 set +x
