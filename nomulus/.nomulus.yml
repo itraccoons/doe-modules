@@ -2,6 +2,8 @@
 doe:
   modules:
     - pull
+  install:
+    - appengine-java-sdk
   nomulus:
     - pull
     - env

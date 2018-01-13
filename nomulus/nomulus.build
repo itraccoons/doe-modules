@@ -10,7 +10,11 @@ if [ ! -L ~/.cache/bazel ]; then
     ln -s /tmp/bazel ~/.cache/bazel
 fi
 
-eval "$(doe nomulus env)"
+if [ x"$NOMULUS_DIR" = x ]; then
+    echo "Run \"eval \$(doe nomulus env)\" first"
+    exit
+fi
+
 cd "$NOMULUS_DIR" || exit
 
 bazel   --batch build \

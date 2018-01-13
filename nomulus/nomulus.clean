@@ -5,9 +5,9 @@ set -ex
 if [ x"$NOMULUS_DIR" = x ]; then
     echo "Run \"eval \$(doe nomulus env)\" first"
     exit
-else
-    cd "$NOMULUS_DIR" || exit
-    bazel clean
 fi
+
+cd "$NOMULUS_DIR" || exit
+bazel clean
 
 set +x
