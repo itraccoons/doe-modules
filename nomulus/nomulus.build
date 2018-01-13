@@ -10,7 +10,7 @@ if [ ! -L ~/.cache/bazel ]; then
     ln -s /tmp/bazel ~/.cache/bazel
 fi
 
-eval $(doe nomulus env)
+eval "$(doe nomulus env)"
 
 cd "$NOMULUS_DIR" || exit
 
