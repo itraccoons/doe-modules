@@ -10,11 +10,13 @@ if [ ! -L ~/.cache/bazel ]; then
     ln -s /tmp/bazel ~/.cache/bazel
 fi
 
+eval $(doe nomulus env)
+
 cd "$NOMULUS_DIR" || exit
 
-#bazel   --batch build \
-#        --javacopt="-target 8 -source 8" \
-#        //java{,tests}/google/registry/...
+bazel   --batch build \
+        --javacopt="-target 8 -source 8" \
+        //java{,tests}/google/registry/...
 
 ARTEFACTS="$NOMULUS_DIR"/.artefacts
 if [ -d "$ARTEFACTS" ]; then
