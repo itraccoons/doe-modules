@@ -1,0 +1,9 @@
+---
+doe:
+  modules:
+    - pull
+  nomulus:
+    - pull
+    - build
+    - clean
+    - update

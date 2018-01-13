@@ -2,7 +2,7 @@
 
 set -ex
 
-cd ~/src/nomulus/ || exit
+cd "$NOMULUS_DIR" || exit
 
 bazel clean
 
