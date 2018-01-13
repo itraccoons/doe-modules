@@ -1,1 +1,20 @@
 #!/bin/sh
+
+set -ex
+
+PROJECT=~/projects/nomulusx
+
+eval "$(doe monulus env)"
+
+if [ -d "$PROJECT" ]; then
+    rm -rf "$PROJECT"
+fi
+
+mkdir -p "$PROJECT"
+unzip "$NOMULUS_DIR"/.afterfacts/google/registry/registry_alpha.ear -d "$PROJECT"
+
+doe nomulus install-gae-sdk-java
+
+
+
+set +x

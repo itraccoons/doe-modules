@@ -11,7 +11,6 @@ if [ ! -L ~/.cache/bazel ]; then
 fi
 
 eval "$(doe nomulus env)"
-
 cd "$NOMULUS_DIR" || exit
 
 bazel   --batch build \

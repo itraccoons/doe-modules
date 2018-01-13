@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-VER="1.9.60"
-
 set -ex
+
+VER="1.9.60"
 
 cd ~
 if [ ! -d sdks ]; then

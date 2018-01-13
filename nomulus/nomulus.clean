@@ -2,6 +2,7 @@
 
 set -ex
 
+eval "$(doe nomulus env)"
 cd "$NOMULUS_DIR" || exit
 
 bazel clean
