@@ -1,16 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -xe
+VER="1.9.60"
+
+set -ex
 
 cd ~
-[ -d "sdks" ] || mkdir ~/sdks
+if [ ! -d sdks ]; then
+    mkdir ~/sdks
+fi
 
 cd sdks
-if [ ! -d "appengine-java-sdk-1.9.60" ]; then
-    curl --output appengine-java-sdk-1.9.60.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.60.zip
-    unzip appengine-java-sdk-1.9.60.zip
-    rm appengine-java-sdk-1.9.60.zip
-    echo "export PATH=$PATH:~/sdks/appengine-java-sdk-1.9.60/bin/" >> "$HOME"/.bash_profile
+
+if [ ! -d appengine-java-sdk-"$VER" ]; then
+    curl --output appengine-java-sdk-"$VER".zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-"$VER".zip
+    unzip appengine-java-sdk-"$VER".zip
+    rm appengine-java-sdk-"$VER".zip
+    echo "export PATH=$PATH:~/sdks/appengine-java-sdk-$VER/bin/" >> ~/.bash_profile
 fi
 
 set +x
