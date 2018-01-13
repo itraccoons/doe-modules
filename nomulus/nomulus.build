@@ -22,6 +22,6 @@ if [ -d "$ARTEFACTS" ]; then
 fi
 
 mkdir "$ARTEFACTS"
-mv "NOMULUS_DIR"/bazel-genfiles/java/google "$ARTEFACTS"
+mv "$NOMULUS_DIR"/bazel-genfiles/java/google "$ARTEFACTS"
 
 set +x
