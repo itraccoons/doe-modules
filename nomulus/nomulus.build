@@ -19,8 +19,9 @@ cd "$NOMULUS_DIR" || exit
 ARTEFACTS="$NOMULUS_DIR"/.artefacts
 if [ -d "$ARTEFACTS" ]; then
     rm -rf "$ARTEFACTS"
-    mkdir "$ARTEFACTS"
-    mv "NOMULUS_DIR"/bazel-genfiles/java/google "$ARTEFACTS"
 fi
+
+mkdir "$ARTEFACTS"
+mv "NOMULUS_DIR"/bazel-genfiles/java/google "$ARTEFACTS"
 
 set +x
