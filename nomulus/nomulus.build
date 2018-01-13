@@ -21,12 +21,12 @@ bazel   --batch build \
         --javacopt="-target 8 -source 8" \
         //java{,tests}/google/registry/...
 
-ARTEFACTS="$NOMULUS_DIR"/.artefacts
-if [ -d "$ARTEFACTS" ]; then
-    rm -rf "$ARTEFACTS"
+ARTIFACTS="$NOMULUS_DIR"/.artifacts
+if [ -d "$ARTIFACTS" ]; then
+    rm -rf "$ARTIFACTS"
 fi
 
-mkdir "$ARTEFACTS"
-mv "$NOMULUS_DIR"/bazel-genfiles/java/google "$ARTEFACTS"
+mkdir "$ARTIFACTS"
+mv "$NOMULUS_DIR"/bazel-genfiles/java/google "$ARTIFACTS"
 
 set +x
