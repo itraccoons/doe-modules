@@ -10,10 +10,10 @@ if [ -f ./doe-compose.yml ]; then
 	    '...'    ) break ;;
 	    '#'*     ) continue ;;
 	    '    - '*) 
-			c3=$(echo $l | tr -d '-')
+			c3=$(echo $l | cut -c7-)
 			;;
 	    '  '*    )
-			c2=$(echo $l | tr -d ':')
+			c2=$(echo $l | cut -c3- | tr -d ':')
 			continue
 			;;
 	    *        )
@@ -22,7 +22,7 @@ if [ -f ./doe-compose.yml ]; then
 			;;
 	esac
 	
-	echo $c1 $c2 $c3
+	echo "$c1 $c2 $c3"
 	
     done
 else
