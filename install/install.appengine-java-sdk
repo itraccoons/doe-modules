@@ -16,6 +16,8 @@ if [ ! -d appengine-java-sdk-"$VER" ]; then
     unzip appengine-java-sdk-"$VER".zip
     rm appengine-java-sdk-"$VER".zip
     echo "export PATH=$PATH:~/sdks/appengine-java-sdk-$VER/bin/" >> ~/.bash_profile
+else
+    echo "appengine-java-sdk-$VER already installed"
 fi
 
 set +x
