@@ -15,7 +15,7 @@ if [ -f ./doe-compose.yml ]; then
 	    *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
 	esac
 	
-	echo "EXECUTE: [ $cmd $mod $func ]----------"
+	echo "--- [ $cmd $mod $func ]---"
 	eval "$cmd $mod $func"
 	
     done
