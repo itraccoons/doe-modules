@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [ -f ./doe-compose.yml ]; then
+    IFS=$'\r\n' file=($(cat ./doe-compose.yml))
+
+    for l in ${file[@]}
+    do
+	case $l in
+	    '---'     ) continue ;;
+	    '...'    ) break ;;
+	    '#'*     ) continue ;;
+	    '    - '*) 
+			c3=$(echo $l | tr -d '-')
+			;;
+	    '  '*    )
+			c2=$(echo $l | tr -d ':')
+			continue
+			;;
+	    *        )
+			c1=$(echo $l | tr -d ':')
+			continue
+			;;
+	esac
+	
+	echo $c1 $c2 $c3
+	
+    done
+else
+    echo "doe-compose.yml undetected"
+fi
+
