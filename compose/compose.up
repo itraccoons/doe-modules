@@ -1,28 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# shellcheck disable=SC2039
 
 if [ -f ./doe-compose.yml ]; then
     IFS=$'\r\n' file=($(cat ./doe-compose.yml))
 
-    for l in ${file[@]}
+    for l in "${file[@]}"
     do
 	case $l in
-	    '---'     ) continue ;;
+	    '---'    ) continue ;;
 	    '...'    ) break ;;
 	    '#'*     ) continue ;;
-	    '    - '*) 
-			c3=$(echo $l | cut -c7-)
-			;;
-	    '  '*    )
-			c2=$(echo $l | cut -c3- | tr -d ':')
-			continue
-			;;
-	    *        )
-			c1=$(echo $l | tr -d ':')
-			continue
-			;;
+	    '    - '*) func=$(echo "$l" | cut -c7-) ;;
+	    '  '*    ) mod=$(echo "$l" | cut -c3- | tr -d ':'); continue ;;
+	    *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
 	esac
 	
-	echo "$c1 $c2 $c3"
+	echo "$cmd $mod $func"
 	
     done
 else
