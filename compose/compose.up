@@ -15,7 +15,7 @@ if [ -f ./doe-compose.yml ]; then
 	    *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
 	esac
 	
-	echo -e "\e[36m===[ $cmd $mod $func ]===\e[0m"
+	echo -e "\e[96m===[ $cmd $mod $func ]===\e[0m"
 	eval "$cmd $mod $func"
 	
     done
