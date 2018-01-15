@@ -2,20 +2,24 @@
 
 set -ex
 
-PROJECT=~/projects/nomulusx
+if [ x"$PROJECT_ID" = x]; then
+    echo "PROJECT_ID is undefined"
+fi
+
+PROJECT_DIR=~/projects/"$PROJECT_ID"
 
 if [ x"$NOMULUS_DIR" = x ]; then
     echo "Run \"eval \$(doe nomulus env)\" first"
     exit
 fi
 
-if [ -d "$PROJECT" ]; then
-    rm -rf "$PROJECT"
+if [ -d "$PROJECT_DIR" ]; then
+    rm -rf "$PROJECT_DIR"
 fi
 
-mkdir -p "$PROJECT"
-unzip "$NOMULUS_DIR"/.artifacts/google/registry/registry_alpha.ear -d "$PROJECT"
+mkdir -p "$PROJECT_DIR"
+unzip "$NOMULUS_DIR"/.artifacts/google/registry/registry_alpha.ear -d "$PROJECT_DIR"
 
-appcfg.sh -A nomulusx --enable_jar_splitting update "$PROJECT"
+appcfg.sh -A "$PROJECT_ID" --enable_jar_splitting update "$PROJECT_DIR"
 
 set +x

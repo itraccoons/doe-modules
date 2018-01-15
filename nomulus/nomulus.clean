@@ -3,7 +3,7 @@
 set -ex
 
 if [ x"$NOMULUS_DIR" = x ]; then
-    echo "Run \"eval \$(doe nomulus env)\" first"
+    echo "NOMULUS_DIR is undefined"
     exit
 fi
 

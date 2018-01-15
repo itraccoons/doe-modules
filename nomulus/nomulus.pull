@@ -1,18 +1,16 @@
 #!/bin/sh
-# shellcheck disable=SC2164
 
 set -ex
 
-cd ~ 
-if [ ! -d "src" ]; then
-    mkdir src
+if [ x"$NOMULUS_DIR" = x ]; then
+    echo "NOMULUS_DIR is undefined"
+    exit
 fi
 
-cd src
-if [ ! -d "nomulus" ]; then
-    git clone https://github.com/google/nomulus.git
+if [ ! -d "$NOMULUS_DIR" ]; then
+    git clone https://github.com/google/nomulus.git "$NOMULUS_DIR"
 else
-    cd nomulus
+    cd "$NOMULUS_DIR" || exit
     git pull
 fi
 
