@@ -16,4 +16,6 @@ fi
 mkdir -p "$PROJECT"
 unzip "$NOMULUS_DIR"/.artifacts/google/registry/registry_alpha.ear -d "$PROJECT"
 
+appcfg.sh -A nomulusx --enable_jar_splitting update "$PROJECT"
+
 set +x
