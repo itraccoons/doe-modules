@@ -16,7 +16,7 @@ if [ -f ./doe-compose.yml ]; then
 	esac
 	
 	echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
-	eval "$cmd $mod $func"
+	eval "set -x; $cmd $mod $func; set +x 2>/dev/null"
 	
     done
 else
