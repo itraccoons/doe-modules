@@ -10,12 +10,12 @@ fi
 PROJECT_DIR=~/projects/"${PROJECT_ID}"
 
 if [[ x"${NOMULUS_DIR}" = x ]]; then
-  echo "NOMULUS_DIR is undefined"
-  exit
+    echo "NOMULUS_DIR is undefined"
+    exit
 fi
 
 if [[ -d "${PROJECT_DIR}" ]]; then
-  rm -rf "${PROJECT_DIR}"
+    rm -rf "${PROJECT_DIR}"
 fi
 
 mkdir -p "${PROJECT_DIR}"

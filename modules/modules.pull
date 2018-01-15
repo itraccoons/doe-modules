@@ -3,8 +3,8 @@
 DOE_MODDIR=~/.doe/modules
 
 if [ ! -d "${DOE_MODDIR}" ]; then
-  git clone https://github.com/itraccoons/doe-modules.git "${DOE_MODDIR}"
+    git clone https://github.com/itraccoons/doe-modules.git "${DOE_MODDIR}"
 else
-  cd "${DOE_MODDIR}" || exit
-  git pull
+    cd "${DOE_MODDIR}" || exit
+    git pull
 fi

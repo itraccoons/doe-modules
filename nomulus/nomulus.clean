@@ -3,8 +3,8 @@
 set -ex
 
 if [[ x"${NOMULUS_DIR}" = x ]]; then
-  echo "NOMULUS_DIR is undefined"
-  exit
+    echo "NOMULUS_DIR is undefined"
+    exit
 fi
 
 cd "${NOMULUS_DIR}" || exit
