@@ -2,16 +2,16 @@
 
 set -ex
 
-if [ x"$NOMULUS_DIR" = x ]; then
-    echo "NOMULUS_DIR is undefined"
-    exit
+if [[ x"$NOMULUS_DIR" = x ]]; then
+  echo "NOMULUS_DIR is undefined"
+  exit
 fi
 
-if [ ! -d "$NOMULUS_DIR" ]; then
-    git clone https://github.com/google/nomulus.git "$NOMULUS_DIR"
+if [[ ! -d "${NOMULUS_DIR}" ]]; then
+  git clone https://github.com/google/nomulus.git "${NOMULUS_DIR}"
 else
-    cd "$NOMULUS_DIR" || exit
-    git pull
+  cd "${NOMULUS_DIR}" || exit
+  git pull
 fi
 
 set +x

@@ -2,32 +2,32 @@
 
 set -ex
 
-if [ ! -d "/tmp/bazel" ]; then
-    mkdir /tmp/bazel
+if [[ ! -d "/tmp/bazel" ]]; then
+  mkdir /tmp/bazel
 fi
 
-if [ ! -L ~/.cache/bazel ]; then
-    ln -s /tmp/bazel ~/.cache/bazel
+if [[ ! -L ~/.cache/bazel ]]; then
+  ln -s /tmp/bazel ~/.cache/bazel
 fi
 
-if [ x"$NOMULUS_DIR" = x ]; then
-    echo "NOMULUS_DIR is undefined"
-    exit
+if [[ x"${NOMULUS_DIR}" = x ]]; then
+  echo "NOMULUS_DIR is undefined"
+  exit
 fi
 
-cd "$NOMULUS_DIR" || exit
+cd "${NOMULUS_DIR}" || exit
 
 nice -n -20 \
-    bazel   --batch build \
-	    --javacopt="-target 8 -source 8" \
-    	    //java{,tests}/google/registry/...
+  bazel --batch build \
+         --javacopt="-target 8 -source 8" \
+         //java{,tests}/google/registry/...
 
-ARTIFACTS="$NOMULUS_DIR"/.artifacts
-if [ -d "$ARTIFACTS" ]; then
-    rm -rf "$ARTIFACTS"
+ARTIFACTS="${NOMULUS_DIR}"/.artifacts
+if [[ -d "${ARTIFACTS}" ]]; then
+  rm -rf "${ARTIFACTS}"
 fi
 
-mkdir "$ARTIFACTS"
-mv "$NOMULUS_DIR"/bazel-genfiles/java/google "$ARTIFACTS"
+mkdir "${ARTIFACTS}"
+mv "${NOMULUS_DIR}"/bazel-genfiles/java/google "${ARTIFACTS}"
 
 set +x

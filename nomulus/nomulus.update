@@ -3,24 +3,24 @@
 
 set -ex
 
-if [ x"$PROJECT_ID" = x ]; then
+if [[ x"${PROJECT_ID}" = x ]]; then
     echo "PROJECT_ID is undefined"
 fi
 
-PROJECT_DIR=~/projects/"$PROJECT_ID"
+PROJECT_DIR=~/projects/"${PROJECT_ID}"
 
-if [ x"$NOMULUS_DIR" = x ]; then
-    echo "NOMULUS_DIR is undefined"
-    exit
+if [[ x"${NOMULUS_DIR}" = x ]]; then
+  echo "NOMULUS_DIR is undefined"
+  exit
 fi
 
-if [ -d "$PROJECT_DIR" ]; then
-    rm -rf "$PROJECT_DIR"
+if [[ -d "${PROJECT_DIR}" ]]; then
+  rm -rf "${PROJECT_DIR}"
 fi
 
-mkdir -p "$PROJECT_DIR"
-unzip "$NOMULUS_DIR"/.artifacts/google/registry/registry_alpha.ear -d "$PROJECT_DIR"
+mkdir -p "${PROJECT_DIR}"
+unzip "${NOMULUS_DIR}"/.artifacts/google/registry/registry_alpha.ear -d "${PROJECT_DIR}"
 
-appcfg.sh -A "$PROJECT_ID" --enable_jar_splitting update "$PROJECT_DIR"
+appcfg.sh -A "${PROJECT_ID}" --enable_jar_splitting update "${PROJECT_DIR}"
 
 set +x
