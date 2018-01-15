@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 DOE_MODDIR=~/.doe/modules
 
 if [ ! -d "$DOE_MODDIR" ]; then
