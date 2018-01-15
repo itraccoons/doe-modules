@@ -2,7 +2,7 @@
 
 set -ex
 
-if [ x"$PROJECT_ID" = x]; then
+if [ x"$PROJECT_ID" = x ]; then
     echo "PROJECT_ID is undefined"
 fi
 
