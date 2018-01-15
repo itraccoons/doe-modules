@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# shellcheck disable=SC2153
 
 set -ex
 
@@ -9,7 +10,7 @@ fi
 PROJECT_DIR=~/projects/"$PROJECT_ID"
 
 if [ x"$NOMULUS_DIR" = x ]; then
-    echo "Run \"eval \$(doe nomulus env)\" first"
+    echo "NOMULUS_DIR is undefined"
     exit
 fi
 
