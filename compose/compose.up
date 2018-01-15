@@ -4,14 +4,14 @@
 if [[ -f ./doe-compose.yml ]]; then
   IFS=$'\r\n' file=($(cat ./doe-compose.yml))
 
-  for l in "${file[@]}"; do
-    case $l in
+  for line in "${file[@]}"; do
+    case ${line} in
       '---'    ) continue ;;
       '...'    ) break ;;
       '#'*     ) continue ;;
-      '    - '*) func=$(echo "$l" | cut -c7-) ;;
-      '  '*    ) mod=$(echo "$l" | cut -c3- | tr -d ':'); continue ;;
-      *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
+      '    - '*) func=$(echo "${line}" | cut -c7-) ;;
+      '  '*    ) mod=$(echo "${line}" | cut -c3- | tr -d ':'); continue ;;
+      *        ) cmd=$(echo "${line}" | tr -d ':'); continue ;;
     esac
 
     echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
