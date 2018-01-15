@@ -17,9 +17,10 @@ fi
 
 cd "$NOMULUS_DIR" || exit
 
-bazel   --batch build \
-        --javacopt="-target 8 -source 8" \
-        //java{,tests}/google/registry/...
+nice -n -20 \
+    bazel   --batch build \
+	    --javacopt="-target 8 -source 8" \
+    	    //java{,tests}/google/registry/...
 
 ARTIFACTS="$NOMULUS_DIR"/.artifacts
 if [ -d "$ARTIFACTS" ]; then
