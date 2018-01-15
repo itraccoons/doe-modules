@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2039
 
-if [ -f ./doe-compose.yml ]; then
-    IFS=$'\r\n' file=($(cat ./doe-compose.yml))
+if [[ -f ./doe-compose.yml ]]; then
+  IFS=$'\r\n' file=($(cat ./doe-compose.yml))
 
-    for l in "${file[@]}"
-    do
-	case $l in
-	    '---'    ) continue ;;
-	    '...'    ) break ;;
-	    '#'*     ) continue ;;
-	    '    - '*) func=$(echo "$l" | cut -c7-) ;;
-	    '  '*    ) mod=$(echo "$l" | cut -c3- | tr -d ':'); continue ;;
-	    *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
-	esac
-	
-	echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
-	eval "set -x; $cmd $mod $func; set +x"
-    done
+  for l in "${file[@]}"; do
+    case $l in
+      '---'    ) continue ;;
+      '...'    ) break ;;
+      '#'*     ) continue ;;
+      '    - '*) func=$(echo "$l" | cut -c7-) ;;
+      '  '*    ) mod=$(echo "$l" | cut -c3- | tr -d ':'); continue ;;
+      *        ) cmd=$(echo "$l" | tr -d ':'); continue ;;
+    esac
+
+    echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
+    eval "set -x; $cmd $mod $func; set +x"
+  done
 else
-    echo "doe-compose.yml undetected"
+  echo "doe-compose.yml undetected"
 fi
 
