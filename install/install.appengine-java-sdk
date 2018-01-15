@@ -5,19 +5,18 @@ set -ex
 VER=${1:-1.9.60}
 
 cd ~
-if [ ! -d sdks ]; then
-    mkdir ~/sdks
+if [[ ! -d sdks ]]; then
+  mkdir ~/sdks
 fi
 
 cd sdks
-
-if [ ! -d appengine-java-sdk-"$VER" ]; then
-    curl --output appengine-java-sdk-"$VER".zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-"$VER".zip
-    unzip appengine-java-sdk-"$VER".zip
-    rm appengine-java-sdk-"$VER".zip
-    echo "export PATH=$PATH:~/sdks/appengine-java-sdk-$VER/bin/" >> ~/.bash_profile
+if [[ ! -d appengine-java-sdk-"${VER}" ]]; then
+  curl --output appengine-java-sdk-"${VER}".zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-"${VER}".zip
+  unzip appengine-java-sdk-"${VER}".zip
+  rm appengine-java-sdk-"${VER}".zip
+  echo "export PATH=$PATH:~/sdks/appengine-java-sdk-${VER}/bin/" >> ~/.bash_profile
 else
-    echo "appengine-java-sdk-$VER already installed"
+  echo "appengine-java-sdk-$VER already installed"
 fi
 
 set +x
