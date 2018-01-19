@@ -1,23 +1,27 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2039
 
-if [[ -f ./doe-compose.yml ]]; then
-    IFS=$'\r\n' file=($(cat ./doe-compose.yml))
+f_yaml="${1:-doe-compose.yml}"
 
-    for line in "${file[@]}"; do
-        case ${line} in
-            '---'    ) continue ;;
-            '...'    ) break ;;
-            '#'*     ) continue ;;
-            '    - '*) func=$(echo "${line}" | cut -c7-) ;;
-            '  '*    ) mod=$(echo "${line}" | cut -c3- | tr -d ':'); continue ;;
-            *        ) cmd=$(echo "${line}" | tr -d ':'); continue ;;
-        esac
+if [[ -f "./${f_yaml}" ]]; then
 
-        echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
-        eval "set -x; $cmd $mod $func; set +x"
-    done
+  IFS=''
+  while read -r line; do
+#  IFS=$'\r\n'
+#  for line in $(cat "${f_yaml}"); do
+    case ${line} in
+      '---'    ) continue ;;
+      '...'    ) break ;;
+      '#'*     ) continue ;;
+      '    - '*) func=$(echo "${line}" | cut -c7-) ;;
+      '  '*    ) mod=$(echo "${line}" | cut -c3- | tr -d ':'); continue ;;
+      *        ) cmd=$(echo "${line}" | tr -d ':'); continue ;;
+    esac
+
+    echo -e "\e[92m===[ $cmd $mod $func ]===\e[0m"
+    eval "set -x; $cmd $mod $func; set +x"
+  done < "${f_yaml}"
 else
-    echo "doe-compose.yml undetected"
+  echo "${f_yaml} undetected"
 fi
 
