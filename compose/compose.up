@@ -10,9 +10,10 @@ if [[ -f "./${f_yaml}" ]]; then
 #  IFS=$'\r\n'
 #  for line in $(cat "${f_yaml}"); do
     case ${line} in
+      '#'*     ) continue ;;
+      ''       ) continue ;;
       '---'    ) continue ;;
       '...'    ) break ;;
-      '#'*     ) continue ;;
       '    - '*) func=$(echo "${line}" | cut -c7-) ;;
       '  '*    ) mod=$(echo "${line}" | cut -c3- | tr -d ':'); continue ;;
       *        ) cmd=$(echo "${line}" | tr -d ':'); continue ;;
