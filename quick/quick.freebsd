@@ -1,0 +1,45 @@
+#!/bin/sh
+# shellcheck disable=SC2154
+
+help="Usage: doe quick ubuntu [-c up|ssh|halt|destroy|provision|config] [-r <release>]"
+mod_tempdir=$HOME/.doe/.tmp/quick
+
+quick_ubuntu_opts="c:r:h"
+
+die()
+{
+    echo "$1"
+    exit 1
+}
+
+quick_ubuntu()
+{
+    while getopts $quick_ubuntu_opts o; do
+	case $o in
+	    '?'|'h' ) echo "$help" && return 1 ;;
+	    $o      ) eval arg_opt_"$o"="${OPTARG}" ;;
+	esac
+    done
+    shift $((OPTIND-1))
+
+    tmp=${mod_tempdir}/ubuntu
+    cmd=${arg_opt_c:=up}
+    case $cmd in
+	up)
+	    [ -d "$tmp" ] || mkdir -p "$tmp"
+	    release="${arg_opt_r:=FreeBSD-11.0-CURRENT}"
+	    cd "$tmp" && vagrant init freebsd/"$release" --minimal --force && vagrant up
+	    ;;
+	ssh|halt|provision|destroy)
+	    [ -f "$tmp"/Vagrantfile ] || die "No FreeBSD. Run 'doe quick freebsd -c up' first"
+	    cd "$tmp" || die "Can't cd $tmp"
+	    eval vagrant "$cmd" "$@"
+	    [ "$cmd" = "destroy" ] && rm -rf "$tmp"
+	    ;;
+	*)  
+	    echo "$help"
+	    ;;
+    esac
+}
+
+quick_ubuntu "$@" || exit 1
